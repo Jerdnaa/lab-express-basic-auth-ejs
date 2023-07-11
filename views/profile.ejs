@@ -1,1 +1,10 @@
-<h1>PROFILE</h1>
+<% if (user) { %>
+    <h1><%= user.username %>'s PROFILE</h1>
+<% } else { %>
+    <h1>PROFILE</h1>
+    <% } %>
+<a href="/main">Go to main</a>
+<a href="/private">Go to private</a>
+
+
+ 

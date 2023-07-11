@@ -25,14 +25,17 @@ router.get("/login", (req, res) => {
 
 router.post("/login", async (req, res) => {
     // console.log(req.body)
+    // console.log(req.session)
     const userLogin = req.body;
     try {
         const checkedUser = await User.findOne({username: userLogin.username})
-        console.log(checkedUser)
+        // console.log(checkedUser)
         if(checkedUser) {
             if(bcrypt.compareSync(userLogin.password, checkedUser.password)){
                 const loggedUser = { ...checkedUser._doc}
                 delete loggedUser.password
+                req.session.user = loggedUser;
+                console.log(req.session)
                 res.redirect("/profile")
             } else {
                 console.log("Incorect password or username")
